@@ -7,15 +7,22 @@
 import snap
 import random
 import matplotlib.pyplot as plt
+import sys
+
+if len(sys.argv) < 5:
+    print('Incorrect number of arguments. Way of usage:')
+    print('python ' + sys.argv[0] + ' <p of infection> <# of initial infected> <time infected> <time removed>')
+    exit(1)
 
 Graph =  snap.LoadEdgeList(snap.PNEANet, "./soc-Epinions1.txt", 0, 1)
 # Graph = snap.GenRndGnm(snap.PNEANet, 10, 30)
 
 # Initial parameters of the model
-infected = [1,2,3]
-p = 0.5
-time_infected = 2
-time_removed = 2
+infected = random.sample(range(1, Graph.GetNodes()+1), int(sys.argv[2]))
+p = float(sys.argv[1])
+time_infected = int(sys.argv[3])
+time_removed = int(sys.argv[4])
+
 # Susceptible = 0
 # Infectious = 1
 # Removed = 2

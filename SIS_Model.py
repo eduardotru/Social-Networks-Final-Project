@@ -5,14 +5,19 @@
 import snap
 import random
 import matplotlib.pyplot as plt
+import sys
+
+if len(sys.argv) < 4:
+    print('Incorrect number of arguments. Way of usage:')
+    print('python ' + sys.argv[0] + ' <p of infection> <# of initial infected> <time infected>')
+    exit(1)
 
 Graph =  snap.LoadEdgeList(snap.PNEANet, "./soc-Epinions1.txt", 0, 1)
 #Graph = snap.GenRndGnm(snap.PNEANet, 10, 30)
 number_node = Graph.GetNodes()
-infected = [x for x in range(100)]
-tl = 3  #time infected before recovering
-p = 0.05  #probability of infection with interaction
-
+infected = random.sample(range(1, Graph.GetNodes()+1), int(sys.argv[2]))
+p = float(sys.argv[1])
+time_infected = int(sys.argv[3])
 
 labels = snap.TIntStrH()
 for Node in Graph.Nodes():
@@ -59,7 +64,7 @@ while (number_S != number_node) & (number_echo < 100):
             # update the step of infection.
             step_this = Graph.GetIntAttrDatN(nid, "step")
             step_this += 1
-            if step_this == tl:
+            if step_this == time_infected:
                 # The state 4 is temporary in order to avoid repeated infection.
                 Graph.AddIntAttrDatN(nid, 4, "state")
                 Graph.AddIntAttrDatN(nid, 0, "step")
