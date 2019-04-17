@@ -28,7 +28,7 @@ NIdV = snap.TIntV()
 rangList = random.sample(range(MainGraph.GetNodes()), 7000)
 
 for i in range(1, 7000):
-    NIdV.add(rangList[i])
+    NIdV.Add(rangList[i])
 
 subGraph = snap.GetSubGraph(MainGraph, NIdV)
 
@@ -52,14 +52,14 @@ for index in range(0,3):
     Graph = graphList[index]
     print("Next Graph to plot: SIS Model for " + graphNameList[index])
     number_node = Graph.GetNodes()
-    infected = random.sample(range(1, Graph.GetNodes()+1), int(sys.argv[2]))
+    init_infected = random.sample(range(1, Graph.GetNodes()+1), int(sys.argv[2]))
     p = float(sys.argv[1])
     time_infected = int(sys.argv[3])
     
     for Node in Graph.Nodes():
         nid = Node.GetId()
         state = 0
-        if nid in infected:
+        if nid in init_infected:
             Graph.AddIntAttrDatN(nid, 1, "state")
             state = 1
         else:
@@ -73,8 +73,8 @@ for index in range(0,3):
     
     #snap.DrawGViz(Graph, snap.gvlDot, "graph.png", "graph SIR", labels)
     
-    number_S = number_node - len(infected)
-    number_I = len(infected)
+    number_S = number_node - len(init_infected)
+    number_I = len(init_infected)
     number_echo = 0
     
     infected_list = []
