@@ -4,12 +4,36 @@
 # Aubrey King - 1155128776
 import snap
 import random
+
 Graph =  snap.LoadEdgeList(snap.PNEANet, "./soc-Epinions1.txt", 0, 1)
 #Graph = snap.GenRndGnm(snap.PNEANet, 10, 30)
 number_node = Graph.GetNodes()
 infected = [1,2,3]
 tl = 1  #time infected before recovering
 p = .02  #probability of infection with interaction
+
+
+#creation of various graphs
+
+
+#Low Clustering Coefficient
+LowClusterGraph = snap.GenRndGnm(snap.PNEANet, 1000, 3000)
+
+#High Clustering Coefficient
+HighClusterGraph = snap.GenFull(snap.PNEANet, 1000)
+    
+#Random subgraph
+NIdV = snap.TIntV()
+rangList = random.sample(range(Graph.GetNodes()), 7000)
+
+for i in range(1, 7000):
+    NIdV.add(rangList[i])
+
+subGraph = snap.GetSubGraph(Graph, NIdV)
+    
+
+
+
 
 
 labels = snap.TIntStrH()
