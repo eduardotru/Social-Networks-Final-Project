@@ -13,15 +13,13 @@ if len(sys.argv) < 4:
     exit(1)
 
 Graph =  snap.LoadEdgeList(snap.PNEANet, "./soc-Epinions1.txt", 0, 1)
-#Graph = snap.GenRndGnm(snap.PNEANet, 10, 30)
+
 number_node = Graph.GetNodes()
 infected = random.sample(range(1, Graph.GetNodes()+1), int(sys.argv[2]))
 p = float(sys.argv[1])
 time_infected = int(sys.argv[3])
 
 #creation of various graphs
-
-
 #Low Clustering Coefficient
 LowClusterGraph = snap.GenRndGnm(snap.PNEANet, 1000, 3000)
 

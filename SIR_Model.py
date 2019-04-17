@@ -15,7 +15,22 @@ if len(sys.argv) < 4:
     exit(1)
 
 Graph =  snap.LoadEdgeList(snap.PNEANet, "./soc-Epinions1.txt", 0, 1)
-# Graph = snap.GenRndGnm(snap.PNEANet, 10, 30)
+
+#creation of various graphs
+#Low Clustering Coefficient
+LowClusterGraph = snap.GenRndGnm(snap.PNEANet, 1000, 3000)
+
+#High Clustering Coefficient
+HighClusterGraph = snap.GenFull(snap.PNEANet, 1000)
+
+#Random subgraph
+NIdV = snap.TIntV()
+rangList = random.sample(range(Graph.GetNodes()), 7000)
+
+for i in range(1, 7000):
+    NIdV.add(rangList[i])
+
+subGraph = snap.GetSubGraph(Graph, NIdV)
 
 # Initial parameters of the model
 infected = random.sample(range(1, Graph.GetNodes()+1), int(sys.argv[2]))
