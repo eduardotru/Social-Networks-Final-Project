@@ -15,7 +15,7 @@ Graph =  snap.LoadEdgeList(snap.PNEANet, "./soc-Epinions1.txt", 0, 1)
 infected = [1,2,3]
 p = 0.5
 time_infected = 2
-time_removes = 2
+time_removed = 2
 # Susceptible = 0
 # Infectious = 1
 # Removed = 2
@@ -48,7 +48,7 @@ infected = [number_infected]
 susceptible = [number_susceptible]
 
 iterations = 0
-while number_removed + number_susceptible < number_nodes:
+while number_removed + number_susceptible < number_nodes and iterations < 100:
     for Node in Graph.Nodes():
         nid = Node.GetId()
         state = Graph.GetIntAttrDatN(nid, "state")
@@ -71,7 +71,7 @@ while number_removed + number_susceptible < number_nodes:
                 Graph.AddIntAttrDatN(nid, 2, "state")
                 step = 0
                 Graph.AddIntAttrDatN(nid, step, "step")
-                
+
         if state == 2:
             step = Graph.GetIntAttrDatN(nid, "step")
             step += 1
@@ -80,8 +80,8 @@ while number_removed + number_susceptible < number_nodes:
                 Graph.AddIntAttrDatN(nid, 4, "state")
                 step = 0
                 Graph.AddIntAttrDatN(nid, step, "step")
-                
-        
+
+
 
     # Count the number of each type of node
     number_removed = 0
