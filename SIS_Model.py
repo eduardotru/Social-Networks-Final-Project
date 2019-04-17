@@ -19,6 +19,29 @@ infected = random.sample(range(1, Graph.GetNodes()+1), int(sys.argv[2]))
 p = float(sys.argv[1])
 time_infected = int(sys.argv[3])
 
+#creation of various graphs
+
+
+#Low Clustering Coefficient
+LowClusterGraph = snap.GenRndGnm(snap.PNEANet, 1000, 3000)
+
+#High Clustering Coefficient
+HighClusterGraph = snap.GenFull(snap.PNEANet, 1000)
+
+#Random subgraph
+NIdV = snap.TIntV()
+rangList = random.sample(range(Graph.GetNodes()), 7000)
+
+for i in range(1, 7000):
+    NIdV.add(rangList[i])
+
+subGraph = snap.GetSubGraph(Graph, NIdV)
+
+
+
+
+
+
 labels = snap.TIntStrH()
 for Node in Graph.Nodes():
     nid = Node.GetId()
