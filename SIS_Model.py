@@ -4,12 +4,14 @@
 # Aubrey King - 1155128776
 import snap
 import random
+import matplotlib.pyplot as plt
+
 Graph =  snap.LoadEdgeList(snap.PNEANet, "./soc-Epinions1.txt", 0, 1)
 #Graph = snap.GenRndGnm(snap.PNEANet, 10, 30)
 number_node = Graph.GetNodes()
-infected = [1,2,3]
-tl = 1  #time infected before recovering
-p = .02  #probability of infection with interaction
+infected = [x for x in range(100)]
+tl = 3  #time infected before recovering
+p = 0.05  #probability of infection with interaction
 
 
 labels = snap.TIntStrH()
@@ -82,17 +84,20 @@ while (number_S != number_node) & (number_echo < 100):
 
         if nodeState == 0:
             number_S_temp += 1
-            
-    
-            
+
+
+
     number_S = number_S_temp
     number_I = number_node - number_S
     number_echo += 1
     infected_list.append(number_I)
     susceptible_list.append(number_S)
-    print("Infected nodes: " + str(number_I) + " At loop: " + str(number_echo))
+    # print("Infected nodes: " + str(number_I) + " At loop: " + str(number_echo))
 
 
+plt.plot(susceptible_list, 'g-')
+plt.plot(infected_list, 'r-')
+plt.show()
 
 
 #for NI in Graph.Nodes():
