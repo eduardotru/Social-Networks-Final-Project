@@ -3,13 +3,13 @@
 # Eduardo Enrique Trujillo Ramos - 1155128853
 # Aubrey King - 1155128776
 import snap
-
-# Graph =  snap.LoadEdgeList(snap.PNEANet, "./soc-Epinions1.txt", 0, 1)
-Graph = snap.GenRndGnm(snap.PNEANet, 10, 30)
+import random
+Graph =  snap.LoadEdgeList(snap.PNEANet, "./soc-Epinions1.txt", 0, 1)
+#Graph = snap.GenRndGnm(snap.PNEANet, 10, 30)
 number_node = Graph.GetNodes()
 infected = [1,2,3]
 tl = 1  #time infected before recovering
-p = .2  #probability of infection with interaction
+p = .02  #probability of infection with interaction
 
 
 labels = snap.TIntStrH()
@@ -28,10 +28,10 @@ for Node in Graph.Nodes():
     string_node = str(nid) + ';0;' + str(state)
     labels[nid] = string_node
 
-snap.DrawGViz(Graph, snap.gvlDot, "graph.png", "graph SIR", labels)
+#snap.DrawGViz(Graph, snap.gvlDot, "graph.png", "graph SIR", labels)
 
-number_S = number_node - len(initial_list)
-number_I = len(initial_list)
+number_S = number_node - len(infected)
+number_I = len(infected)
 number_echo = 0
 
 infected_list = []
@@ -40,7 +40,7 @@ susceptible_list = []
 infected_list.append(number_I)
 susceptible_list.append(number_S)
 
-while number_S != number_node:
+while (number_S != number_node) & (number_echo < 100):
     for NI in Graph.Nodes():
         nid = NI.GetId()
         nodeState = Graph.GetIntAttrDatN(nid, "state")
@@ -76,17 +76,17 @@ while number_S != number_node:
 
         # update the label for each node for visualization.
         step_number = Graph.GetIntAttrDatN(nid, "step")
-        string_node = str(NI.GetId()) + ';' + str(step_number) + ';' + str(ival)
+        string_node = str(NI.GetId()) + ';' + str(step_number) + ';' + str(nodeState)
         labels[NI.GetId()] = string_node
         #snap.DrawGViz(G, snap.gvlDot, "temp_graph%d.png" % number_echo, "graph %d" % number_echo, labels)
 
         if nodeState == 0:
-            number_R_temp += 1
+            number_S_temp += 1
             
     
             
     number_S = number_S_temp
-    number_I = number_nodes - number_S
+    number_I = number_node - number_S
     number_echo += 1
     infected_list.append(number_I)
     susceptible_list.append(number_S)
