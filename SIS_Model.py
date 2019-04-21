@@ -39,7 +39,7 @@ graphList.add(subGraph)
 graphList.add(LowClusterGraph)
 graphList.add(HighClusterGraph)
 
-GraphNameList = []
+graphNameList = []
 graphNameList.add("Main Real World Graph")
 graphNameList.add("Subset of Real World Graph")
 graphNameList.add("Low Cluster Graph")
