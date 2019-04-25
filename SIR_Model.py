@@ -28,12 +28,12 @@ NIdV = snap.TIntV()
 rangList = random.sample(range(Graph.GetNodes()), 7000)
 
 for i in range(1, 7000):
-    NIdV.add(rangList[i])
+    NIdV.Add(rangList[i])
 
 subGraph = snap.GetSubGraph(Graph, NIdV)
 
 # Initial parameters of the model
-infected = random.sample(range(1, Graph.GetNodes()+1), int(sys.argv[2]))
+init_infected = random.sample(range(1, Graph.GetNodes()+1), int(sys.argv[2]))
 p = float(sys.argv[1])
 time_infected = int(sys.argv[3])
 
@@ -45,7 +45,7 @@ labels = snap.TIntStrH()
 for Node in Graph.Nodes():
     nid = Node.GetId()
     state = 0
-    if nid in infected:
+    if nid in init_infected:
         Graph.AddIntAttrDatN(nid, 1, "state")
         state = 1
     else:
@@ -61,8 +61,8 @@ for Node in Graph.Nodes():
 
 number_nodes = Graph.GetNodes()
 number_removed = 0
-number_infected = len(infected)
-number_susceptible = number_nodes - len(infected)
+number_infected = len(init_infected)
+number_susceptible = number_nodes - number_infected
 
 removed = [number_removed]
 infected = [number_infected]
@@ -120,10 +120,15 @@ while number_removed + number_susceptible < number_nodes:
 
     iterations += 1
 
-plt.plot(susceptible, 'g-')
-plt.plot(infected, 'r-')
-plt.plot(removed, '-')
-plt.show()
+graph_name = 'Graph'
+title = 'SIR %s with p=%f, # of init_infected=%d, time_infected=%d' % (graph_name, p, len(init_infected), time_infected)
+png_name = 'SIR_%s_p=%f_init=%d_timeinf=%d.png' % (graph_name, p, len(init_infected), time_infected)
+plt.title(title)
+plt.plot(susceptible, 'g-', label='Susceptible')
+plt.plot(infected, 'r-', label='Infected')
+plt.plot(removed, '-', label='Removed')
+plt.legend(loc='best')
+plt.savefig(png_name)
 
 # for NI in G.Nodes():
 #     nid = NI.GetId()

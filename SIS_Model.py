@@ -120,10 +120,14 @@ while (number_S != number_node) & (number_echo < 100):
     susceptible_list.append(number_S)
     # print("Infected nodes: " + str(number_I) + " At loop: " + str(number_echo))
 
-
-plt.plot(susceptible_list, 'g-')
-plt.plot(infected_list, 'r-')
-plt.show()
+graph_name = 'Graph'
+title = 'SIS %s with p=%f, # of init_infected=%d, time_infected=%d' % (graph_name, p, len(init_infected), time_infected)
+png_name = 'SIS_%s_p=%f_init=%d_timeinf=%d.png' % (graph_name, p, len(init_infected), time_infected)
+plt.title(title)
+plt.plot(susceptible_list, 'g-', label='Susceptible')
+plt.plot(infected_list, 'r-', label='Infected')
+plt.legend(loc='best')
+plt.savefig(png_name)
 
 
 #for NI in Graph.Nodes():

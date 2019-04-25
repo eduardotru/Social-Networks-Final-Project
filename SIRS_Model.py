@@ -136,10 +136,15 @@ while number_removed + number_susceptible < number_nodes and iterations < 100:
 
     iterations += 1
 
-plt.plot(susceptible, 'g-')
-plt.plot(infected, 'r-')
-plt.plot(removed, '-')
-plt.show()
+graph_name = 'Graph'
+title = 'SIRS %s with p=%f, # of init_infected=%d, time_infected=%d, time_removed=%d' % (graph_name, p, len(init_infected), time_infected, time_removed)
+png_name = 'SIRS_%s_p=%f_init=%d_timeinf=%d_timerem=%d.png' % (graph_name, p, len(init_infected), time_infected, time_removed)
+plt.title(title)
+plt.plot(susceptible, 'g-', label='Susceptible')
+plt.plot(infected, 'r-', label='Infected')
+plt.plot(removed, '-', label='Removed')
+plt.legend(loc='best')
+plt.savefig(png_name)
 
 # for NI in G.Nodes():
 #     nid = NI.GetId()
