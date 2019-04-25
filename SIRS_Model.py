@@ -29,7 +29,7 @@ NIdV = snap.TIntV()
 rangList = random.sample(range(MainGraph.GetNodes()), 7000)
 
 for i in range(1, 7000):
-    NIdV.add(rangList[i])
+    NIdV.Add(rangList[i])
 
 subGraph = snap.GetSubGraph(MainGraph, NIdV)
 
