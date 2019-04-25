@@ -163,6 +163,7 @@ for index in range(0,4):
     graph_name = graphNameList[index]
     title = 'SIRS %s with p=%f, # of init_infected=%d, time_infected=%d, time_removed=%d' % (graph_name, p, len(init_infected), time_infected, time_removed)
     png_name = 'SIRS_%s_p=%f_init=%d_timeinf=%d_timerem=%d.png' % (graph_name, p, len(init_infected), time_infected, time_removed)
+    plt.clf()
     plt.title(title)
     plt.plot(susceptible, 'g-', label='Susceptible')
     plt.plot(infected, 'r-', label='Infected')
