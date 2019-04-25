@@ -8,6 +8,7 @@ import snap
 import random
 import matplotlib.pyplot as plt
 import sys
+from textwrap import wrap
 
 if len(sys.argv) < 5:
     print('Incorrect number of arguments. Way of usage:')
@@ -164,7 +165,7 @@ for index in range(0,4):
     title = 'SIRS %s with p=%f, # of init_infected=%d, time_infected=%d, time_removed=%d' % (graph_name, p, len(init_infected), time_infected, time_removed)
     png_name = 'SIRS_%s_p=%f_init=%d_timeinf=%d_timerem=%d.png' % (graph_name, p, len(init_infected), time_infected, time_removed)
     plt.clf()
-    plt.title(title)
+    plt.title("\n".join(wrap(title, 60)))
     plt.plot(susceptible, 'g-', label='Susceptible')
     plt.plot(infected, 'r-', label='Infected')
     plt.plot(removed, '-', label='Removed')
